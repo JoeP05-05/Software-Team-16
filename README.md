@@ -1,7 +1,7 @@
 # Software-Team-16
 Joss Jongewaard -- JossJongewaard
 
-Joseph Peraza -- 
+Joseph Peraza -- JoeP05-05
 
 Kaija Frierson -- 
 
