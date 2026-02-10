@@ -10,7 +10,11 @@ public class udpClient()
     public static void main(String args[])
     {
 
+        Scanner photonClient = new Scanner(System.in);
 
+
+        //Creates the socket for the clients
+        Datagram photonCS = new DatagramSocket();
 
   
     }
