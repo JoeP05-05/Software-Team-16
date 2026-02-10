@@ -14,3 +14,10 @@ Use the following line on the command line:
 ```
 sudo apt update
 ```
+
+## Step 2 
+Install Java on to the virtual machine
+
+```
+sudo apt install default-jdk -y
+```
