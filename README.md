@@ -21,7 +21,7 @@ Install Java on to the virtual machine
 ```
 sudo apt install default-jdk -y
 ```
-Make sure that java is on the current verison availbe, which can be seen by:
+Make sure that java is on the current version available, which can be seen by:
 ```
 java -version
 ```
