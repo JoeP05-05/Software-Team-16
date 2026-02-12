@@ -1,0 +1,27 @@
+In terminal 
+    git //This is to make sure git is installed
+    git config --global user.name "" //Put your github username inside ""
+    git config --global user.email "" // Put you github email inside ""
+    git config --list // This is to make sure it saved your username and email
+
+    Go into the folder you want to clone the github
+    cwd // shows where you are at
+    cd filename // this takes you into file
+    cd .. // This takes you into the file right before that one
+    mkdir foldername //This makes a folder with that name
+
+    To clone github
+    git clone https://github.com/JoeP05-05/Software-Team-16.git  //This will clone this github
+    cat filename // Will look at the content inside the file
+    touch filename.format //Will make a file
+    git status // will show you the status
+
+    To push to online repository
+    git add filename //This will make it where it is a file that will be commited when you push
+    git commit -m "" //Inside the "" add a comment
+    git push origin main // To push your code back to the main
+    
+    //Make your own github key
+    git remote set-url origin https://GITHUBKEYHERE@github.com/JoeP05-05/Software-Team-16.git
+
+    
