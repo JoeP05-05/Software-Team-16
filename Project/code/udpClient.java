@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class udpClient()
 {
+
     public static void main(String args[])
     {
 
@@ -15,6 +16,22 @@ public class udpClient()
 
         //Creates the socket for the clients
         Datagram photonCS = new DatagramSocket();
+
+        InetAddress ip = InetAddress.getLocalHost();
+        byte buf[] = null;
+
+        while(true)
+        {
+            
+
+            buf = inp.getBytes();
+
+            DatagramPacket photonSend = new DatagramPacket(buf, buf.length, ip, 7500);
+
+            photonCS.send(photonSend);
+
+            if (inp)
+        }
 
   
     }

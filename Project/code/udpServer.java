@@ -11,10 +11,13 @@ public class udpServer()
     public static void main(String[] args)
     {
           //Make it listen to port 7501
-          DatagramSocket ds = new DatagramSocket(7501)
+          DatagramSocket ds = new DatagramSocket(7501);
+          
 
+        
 
     }
+
 
 
   
