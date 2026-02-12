@@ -20,18 +20,26 @@ public class udpClient()
         InetAddress ip = InetAddress.getLocalHost();
         byte buf[] = null;
 
-        while(true)
-        {
-            
+        while (true)
+		{
+			String inp = sc.nextLine();
 
-            buf = inp.getBytes();
+			// convert the String input into the byte array.
+			buf = inp.getBytes();
 
-            DatagramPacket photonSend = new DatagramPacket(buf, buf.length, ip, 7500);
+			// Step 2 : Create the datagramPacket for sending
+			// the data.
+			DatagramPacket DpSend =
+				new DatagramPacket(buf, buf.length, ip, 1234);
 
-            photonCS.send(photonSend);
+			// Step 3 : invoke the send call to actually send
+			// the data.
+			ds.send(DpSend);
 
-            if (inp)
-        }
+			// break the loop if user enters "bye"
+			if (inp.equals("bye"))
+				break;
+		}
 
   
     }
