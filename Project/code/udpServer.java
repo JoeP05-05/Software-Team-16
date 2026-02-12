@@ -38,6 +38,8 @@ public class udpServer()
 			receive = new byte[65535];
 		}
 	}
+            
+
 
 	// A utility method to convert the byte array
 	// data into a string representation.
@@ -53,14 +55,9 @@ public class udpServer()
 			i++;
 		}
 		return ret;
-
-        
+  
 
     }
-
-
-
-  
 
 }
 
