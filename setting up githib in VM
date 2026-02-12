@@ -24,4 +24,13 @@ In terminal
     //Make your own github key
     git remote set-url origin https://GITHUBKEYHERE@github.com/JoeP05-05/Software-Team-16.git
 
+To install VS code
+    go to code.visualstudio.com
+    Download the .deb verison
+    Go to downloads on terminal
+    sudo dpkg -i Nameofdownload 
+    The password should be student
+    Then it should be downloaded
+    
+
     
