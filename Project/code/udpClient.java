@@ -15,7 +15,7 @@ public class udpClient()
 
 
         //Creates the socket for the clients
-        Datagram photonCS = new DatagramSocket();
+        Datagram ds = new DatagramSocket();
 
         InetAddress ip = InetAddress.getLocalHost();
         byte buf[] = null;
