@@ -13,11 +13,16 @@ public class udpClient
 
         Scanner photonClient = new Scanner(System.in);
 
+		System.out.println("Enter IP address: ");
+
+		String ipInput = photonClient.nextLine();
+
+		InetAddress ip = InetAddress.getByName(ipInput);
 
         //Creates the socket for the clients
-        Datagram ds = new DatagramSocket(7500);
+        Datagram ds = new DatagramSocket(7500, ip);
 
-        InetAddress ip = InetAddress.getByName("127.0.0.1");
+        
         byte[] buf;
 
         while (true)

@@ -13,12 +13,11 @@ public class udpServer
           //Make it listen to port 7501
           DatagramSocket ds = new DatagramSocket(7501);
 
-          byte[] receive = new byte[65535];
-
-          DatagramPacket serverReceive = null;
 
           while (true)
           {
+
+			byte[] receive = new byte[65535];
             // Step 2 : create a DatgramPacket to receive the data.
 			DpReceive = new DatagramPacket(receive, receive.length);
 
