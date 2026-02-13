@@ -3,7 +3,7 @@ Joss Jongewaard -- JossJongewaard
 
 Joseph Peraza -- JoeP05-05
 
-Kaija Frierson -- Kai-Frier
+Kaija Frierson -- kaijafrierson
 
 Taija Frierson -- Taija797
 
