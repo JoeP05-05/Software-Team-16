@@ -13,11 +13,27 @@ public class udpClient
 
         Scanner photonClient = new Scanner(System.in);
 
-		System.out.println("Enter IP address: ");
+		InetAddress ip = null;
 
-		String ipInput = photonClient.nextLine();
+		while (true)
+		{
+			System.out.println("Enter IP address: ");
 
-		InetAddress ip = InetAddress.getByName(ipInput);
+			String ipInput = photonClient.nextLine();
+
+			try
+			{
+				ip = InetAddress.getByName(ipInput);
+				break;
+			} 
+			catch (Exception e)
+			{
+				System.out.println("Error: Invalid IP address, please input correct address.");
+			}
+		}
+		
+
+		
 
         //Creates the socket for the clients
         Datagram ds = new DatagramSocket(7500, ip);
