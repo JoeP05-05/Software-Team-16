@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 
 
-public class udpServer()
+public class udpServer
 {
 
     public static void main(String[] args)
