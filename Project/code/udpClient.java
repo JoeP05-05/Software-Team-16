@@ -11,6 +11,10 @@ public class udpClient
     public static void main(String args[])
     {
 
+
+		int equimentID = 0;
+
+		
         Scanner photonClient = new Scanner(System.in);
 
 		InetAddress ip = null;
@@ -56,6 +60,15 @@ public class udpClient
 			// Step 3 : invoke the send call to actually send
 			// the data.
 			ds.send(DpSend);
+
+			//Code 202: Game has started
+
+			//Code 53: red base has been scored
+
+			//Code 43: green base has been scored
+
+			//Code 221 (3 times): Game is over
+
 
 			// break the loop
 			if (inp.equals("bye"))
