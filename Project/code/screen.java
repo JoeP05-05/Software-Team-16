@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 public class screen extends JWindow {
    
     private Image backgroundImage;
+    private BufferedImage originalImage;
    
     public screen() {
         setupWindow();
@@ -35,9 +36,22 @@ public class screen extends JWindow {
         try {
             File file = new File("logo.jpg");
             if (file.exists()) {
-                Image img = ImageIO.read(file);
-                // Set window size to match image
-                setSize(img.getWidth(null), img.getHeight(null));
+                // Read the original image once and save it
+                originalImage = ImageIO.read(file);
+                int imgW = originalImage.getWidth();
+                int imgH = originalImage.getHeight();
+
+                // Compute max allowed size (90% of screen) so it fits most displays
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int maxW = (int) (screenSize.width * 0.9);
+                int maxH = (int) (screenSize.height * 0.9);
+
+                double scale = Math.min(1.0, Math.min((double) maxW / imgW, (double) maxH / imgH));
+                int newW = (int) Math.round(imgW * scale);
+                int newH = (int) Math.round(imgH * scale);
+
+                // Set window size to scaled image size
+                setSize(newW, newH);
             } else {
                 // Fallback size if image not found
                 setSize(800, 600);
@@ -53,9 +67,24 @@ public class screen extends JWindow {
            
             if (file.exists()) {
                 System.out.println("Loading logo.jpg from current directory");
-                // Load the image at its original size
-                backgroundImage = ImageIO.read(file);
-                System.out.println("Image loaded: " + backgroundImage.getWidth(null) + "x" + backgroundImage.getHeight(null));
+                // Use the already-read original image if available
+                if (originalImage == null) {
+                    originalImage = ImageIO.read(file);
+                }
+
+                // Scale the image to the window size while preserving aspect ratio
+                int targetW = getWidth();
+                int targetH = getHeight();
+
+                BufferedImage scaled = new BufferedImage(targetW, targetH, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = scaled.createGraphics();
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                g2.drawImage(originalImage, 0, 0, targetW, targetH, null);
+                g2.dispose();
+
+                backgroundImage = scaled;
+                System.out.println("Image loaded and scaled to: " + targetW + "x" + targetH);
             } else {
                 System.out.println("ERROR: logo.jpg not found in current directory!");
                 System.out.println("Current directory: " + System.getProperty("user.dir"));
@@ -105,7 +134,8 @@ public class screen extends JWindow {
                
                 // Draw ONLY the background image, nothing else
                 if (backgroundImage != null) {
-                    g.drawImage(backgroundImage, 0, 0, this);
+                    // Draw the (pre-scaled) background image to fill the component
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
                 }
             }
         };
