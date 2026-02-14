@@ -17,7 +17,7 @@ public class test {
     }
     
     private static void testDatabase() {
-        System.out.println("📊 TEST 1: PostgreSQL Connection");
+        System.out.println(" TEST 1: PostgreSQL Connection");
         System.out.println("--------------------------------");
         
         try {
@@ -25,25 +25,25 @@ public class test {
             String url = "jdbc:postgresql://127.0.0.1:5432/photon";
             
             try (Connection conn = DriverManager.getConnection(url, "student", "")) {
-                System.out.println("✅ SUCCESS: Connected to database");
+                System.out.println(" SUCCESS: Connected to database");
                 
                 // Check if players table exists
                 DatabaseMetaData meta = conn.getMetaData();
                 ResultSet tables = meta.getTables(null, null, "players", null);
                 
                 if (tables.next()) {
-                    System.out.println("✅ SUCCESS: 'players' table exists");
+                    System.out.println(" SUCCESS: 'players' table exists");
                     
                     // Count existing players
                     try (Statement stmt = conn.createStatement();
                          ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM players")) {
                         rs.next();
                         int count = rs.getInt(1);
-                        System.out.println("📊 Current players in database: " + count);
+                        System.out.println(" Current players in database: " + count);
                     }
                     
                     // Show table structure
-                    System.out.println("\n📋 Table structure:");
+                    System.out.println("\n Table structure:");
                     ResultSet columns = meta.getColumns(null, null, "players", null);
                     while (columns.next()) {
                         String colName = columns.getString("COLUMN_NAME");
@@ -52,12 +52,12 @@ public class test {
                     }
                     
                 } else {
-                    System.out.println("❌ ERROR: 'players' table does not exist");
+                    System.out.println(" ERROR: 'players' table does not exist");
                     System.out.println("   Run: CREATE TABLE players (id SERIAL PRIMARY KEY, name VARCHAR(100), team VARCHAR(10), equipment_id INTEGER UNIQUE);");
                 }
                 
             } catch (SQLException e) {
-                System.out.println("❌ ERROR: " + e.getMessage());
+                System.out.println(" ERROR: " + e.getMessage());
                 System.out.println("\n🔧 Troubleshooting:");
                 System.out.println("   1. Is PostgreSQL running? (sudo systemctl status postgresql)");
                 System.out.println("   2. Does 'student' user have trust authentication?");
@@ -65,7 +65,7 @@ public class test {
             }
             
         } catch (ClassNotFoundException e) {
-            System.out.println("❌ ERROR: PostgreSQL JDBC Driver not found");
+            System.out.println(" ERROR: PostgreSQL JDBC Driver not found");
             System.out.println("   Download from: https://jdbc.postgresql.org/download/");
             System.out.println("   Add to classpath: javac -cp .:postgresql-42.7.4.jar test.java");
         }
@@ -86,19 +86,19 @@ public class test {
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 7500);
             
             socket.send(packet);
-            System.out.println("✅ SUCCESS: Sent test broadcast: " + message);
+            System.out.println(" SUCCESS: Sent test broadcast: " + message);
             System.out.println("   To: 127.0.0.1:7500");
             System.out.println("\n🔧 To verify: Run 'nc -ul 7500' in another terminal");
             
         } catch (IOException e) {
-            System.out.println("❌ ERROR: " + e.getMessage());
+            System.out.println(" ERROR: " + e.getMessage());
         }
         
         System.out.println();
     }
     
     private static void testUDPReceive() {
-        System.out.println("👂 TEST 3: UDP Receive Listener (port 7501)");
+        System.out.println(" TEST 3: UDP Receive Listener (port 7501)");
         System.out.println("-------------------------------------------");
         
         System.out.println("Starting receiver for 3 seconds...");
@@ -110,27 +110,27 @@ public class test {
                 byte[] buffer = new byte[1024];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 
-                System.out.println("✅ Receiver ready on port 7501");
+                System.out.println(" Receiver ready on port 7501");
                 
                 try {
                     socket.receive(packet);
                     String received = new String(packet.getData(), 0, packet.getLength());
-                    System.out.println("✅ RECEIVED: " + received);
+                    System.out.println(" RECEIVED: " + received);
                     
                     // Parse and test
                     if (received.contains(":")) {
                         String[] parts = received.split(":");
                         System.out.println("   Sender ID: " + parts[0]);
                         System.out.println("   Hit ID: " + parts[1]);
-                        System.out.println("✅ Format correct (integer:integer)");
+                        System.out.println(" Format correct (integer:integer)");
                     }
                     
                 } catch (SocketTimeoutException e) {
-                    System.out.println("⏱️  Timeout - no message received (this is OK for test)");
+                    System.out.println("  Timeout - no message received (this is OK for test)");
                 }
                 
             } catch (IOException e) {
-                System.out.println("❌ ERROR: " + e.getMessage());
+                System.out.println(" ERROR: " + e.getMessage());
             }
         });
         
