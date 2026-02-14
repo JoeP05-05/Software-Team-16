@@ -1,3 +1,5 @@
+//Names: Joss Jongewaard, Kaija Frierson, Taija Frierson, Joseph Peraza 
+//Team: Team 16 
 import javax.swing.*;
 
 public class Main {
