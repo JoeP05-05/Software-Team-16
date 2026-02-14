@@ -1,80 +1,36 @@
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.net.*;
 import java.util.Scanner;
 
-
-public class udpClient
-{
-
-    public static void main(String args[])
-    {
-
-
-		int equimentID = 0;
-
-		
-        Scanner photonClient = new Scanner(System.in);
-
-		InetAddress ip = null;
-
-		while (true)
-		{
-			System.out.println("Enter IP address: ");
-
-			String ipInput = photonClient.nextLine();
-
-			try
-			{
-				ip = InetAddress.getByName(ipInput);
-				break;
-			} 
-			catch (Exception e)
-			{
-				System.out.println("Error: Invalid IP address, please input correct address.");
-			}
-		}
-		
-
-		
-
-        //Creates the socket for the clients
-        Datagram ds = new DatagramSocket(7500, ip);
-
+public class udpClient {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         
-        byte[] buf;
-
-        while (true)
-		{
-			String inp = photonClient.nextLine();
-
-			// convert the String input into the byte array.
-			buf = inp.getBytes();
-
-			// Step 2 : Create the datagramPacket for sending
-			// the data.
-			DatagramPacket DpSend =
-				new DatagramPacket(buf, buf.length, ip, 7501);
-
-			// Step 3 : invoke the send call to actually send
-			// the data.
-			ds.send(DpSend);
-
-			//Code 202: Game has started
-
-			//Code 53: red base has been scored
-
-			//Code 43: green base has been scored
-
-			//Code 221 (3 times): Game is over
-
-
-			// break the loop
-			if (inp.equals("bye"))
-				break;
-		}
-
-  
+        System.out.println("UDP Client - Send messages to server");
+        System.out.println("Format: senderId:hitId (e.g., 123:456)");
+        System.out.println("Type 'quit' to exit\n");
+        
+        try (DatagramSocket socket = new DatagramSocket()) {
+            InetAddress serverAddress = InetAddress.getByName("127.0.0.1");
+            int serverPort = 7501; // Send to receiver port
+            
+            while (true) {
+                System.out.print("Enter message: ");
+                String message = scanner.nextLine();
+                
+                if (message.equalsIgnoreCase("quit")) {
+                    break;
+                }
+                
+                byte[] buf = message.getBytes();
+                DatagramPacket packet = new DatagramPacket(buf, buf.length, serverAddress, serverPort);
+                socket.send(packet);
+                System.out.println("Sent: " + message);
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        
+        scanner.close();
     }
 }

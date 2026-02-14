@@ -1,9 +1,19 @@
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
-        // Show splash screen
-        Splash splashScreen = new Splash();
-
-        // After splash screen closes, show player entry screen
-        PlayerEntry playerEntry = new PlayerEntry();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        // Show splash screen first, which will open player entry after 3 seconds
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new screen();
+            }
+        });
     }
 }
