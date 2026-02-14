@@ -1,3 +1,5 @@
+//Names: Joss Jongewaard, Kaija Frierson, Taija Frierson, Joseph Peraza 
+//Team: Team 16 
 import java.sql.*;
 import java.net.*;
 import java.io.IOException;
