@@ -1,0 +1,82 @@
+#DATABASE INSTRUCTIONS 
+## INSTALLATION 
+#STEP 1: UPDATE THE SYSTEM
+  -> sudo apt update 
+upgrade installed packages: sudo apt upgrad -y 
+    
+#STEP 2: INSTALL JAVA: 
+-> sudo apt install default-jdk -y 
+
+--> INSTALL java, Git, PostgreSQL, and wget: 
+sudo apt install default-jdk git postgresql postgresql-contrib netcat-openbsd wget -y
+
+#STEP 3: check java version 
+-> java -version 
+    javac - version 
+
+#STEP 4: Install/Update PostgreSQL
+-> sudo apt install postgresql postgresql-contrib -y 
+
+
+#STEP 5: Set up Database: 
+-> sudo -u postgres psql 
+
+# --- Inside the PostgreSQL prompt (you'll see postgres=#) ---
+# Create the database
+-Check to see what databases already exist: \1 
+
+#STEP 5: Connect to New database 
+  -> \c photon 
+If "photon" not (in database) there: 
+  -> enter this command: CREATE DATABASE photon 
+
+#STEP 6: Create player table: 
+CREATE TABLE players (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    team VARCHAR(10),
+    equipment_id INTEGER UNIQUE
+);
+--> check to see if table created: \d players 
+--> command to exit the PostgreSQL: \q 
+
+USER TRUST AUTHENTICATION: 
+STEP 7: admin creation 
+    sudo -u postgres psql 
+                                    
+Create the user: CREATE USER student; 
+                                    
+Make user supervisor: ALTER USER student WITH SUPERUSER; 
+                                    
+Grant permission photon database: 
+--> GRANT ALL PRIVILEGES ON DATABASE photon TO student; 
+--> GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO student;
+ -->   GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO student;
+Exit PostgreSQL: \q 
+
+#STEP 8: TRUST AUTHENTICATION: 
+sudo -u postgres psql -c "SHOW hba_file;"
+    sudo nano /etc/postgresql/13/main/pg_hba.conf
+    Add this line before IPv4 connections : host    photon          student         127.0.0.1/32    trust
+
+#STEP 9: exit nano file and RESTART PostgreSQL: 
+    sudo systemctl restart postgresql
+                                    
+# Download the PostgreSQL JDBC driver
+wget https://jdbc.postgresql.org/download/postgresql-42.7.4.jar
+                                    
+#STEP 10: GET FILES FROM GITHUB: 
+    git clone https://github.com/your-team/your-repo.git
+    cd your-repo
+
+#STEP 11: COMPILE JAVA FILES: javac -cp .:postgresql-42.7.4.jar *.java 
+
+#STEP 12: run the application: java -cp .:postgresql-42.7.4.jar Main
+
+#STEP 13: RUN TEST SCRIPT: 
+    javac -cp .:postgresql-42.7.4.jar test.java
+    java -cp .:postgresql-42.7.4.jar test
+
+        
+
+    
