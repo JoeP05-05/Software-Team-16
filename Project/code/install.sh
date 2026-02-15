@@ -19,17 +19,3 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Compiling done."
-echo ""
-echo "Starting Main file: "
-
-#To start main
-java -cp .:postgresql-42.7.4.jar Main
-
-#Run test scripts
-echo "Compiling test scripts: "
-javac -cp .:postgresql-42.7.4.jar test.java
-
-echo "Compiling done."
-
-echo "Running test: "
-java -cp .:postgresql-42.7.4.jar test
