@@ -25,3 +25,14 @@ Make sure that java is on the current version available, which can be seen by:
 ```
 java -version
 ```
+
+##Step 3
+Install Git, and PostgreSQL, and wget:
+```
+sudo apt install git postgresql postgresql-contrib netcat-openbsd wget -y
+```
+
+#STEP 4: Install/Update PostgreSQL
+```
+sudo apt install postgresql postgresql-contrib -y
+```
