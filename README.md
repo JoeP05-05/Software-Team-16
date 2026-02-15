@@ -26,13 +26,31 @@ Make sure that java is on the current version available, which can be seen by:
 java -version
 ```
 
-##Step 3
+## Step 3
 Install Git, and PostgreSQL, and wget:
 ```
 sudo apt install git postgresql postgresql-contrib netcat-openbsd wget -y
 ```
 
-#STEP 4: Install/Update PostgreSQL
+## Step 4: Install/Update PostgreSQL
 ```
 sudo apt install postgresql postgresql-contrib -y
 ```
+
+## Step 5: Cloning the repositiory on the Virtual machine and getting into the right folder
+```
+git clone https://github.com/JoeP05-05/Software-Team-16.git
+cd Software-Team-16
+```
+Then, to get into the correct folder to run the program, do the following:
+```
+cd Project
+cd code
+```
+
+## Step 6: Run the Install Script
+```
+chmod +x install.sh
+./install.sh
+```
+
