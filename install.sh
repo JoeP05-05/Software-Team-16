@@ -5,6 +5,7 @@ then
   echo "Java compiler not installed."
   echo "Do: sudo apt install default-jdk"
 exit 1
+fi
 
 echo "Compiling Java files: "
 
