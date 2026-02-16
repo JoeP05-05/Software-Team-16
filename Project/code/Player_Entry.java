@@ -94,7 +94,7 @@ public class Player_Entry extends JFrame {
         headerPanel.add(titleLabel, BorderLayout.CENTER);
         
         // Settings button
-        settingsButton = new JButton("⚙ Settings");
+        settingsButton = new JButton(" Settings");
         settingsButton.setFont(new Font("Arial", Font.PLAIN, 14));
         settingsButton.addActionListener(e -> showSettingsDialog());
         headerPanel.add(settingsButton, BorderLayout.EAST);
@@ -327,7 +327,7 @@ public class Player_Entry extends JFrame {
             Class.forName("org.postgresql.Driver");
             String url = "jdbc:postgresql://127.0.0.1:5432/photon";
             dbConnection = DriverManager.getConnection(url, "student", "");
-            System.out.println("✅ Connected to PostgreSQL database");
+            System.out.println(" Connected to PostgreSQL database");
             
             // Load existing players into memory
             loadPlayersFromDatabase();
@@ -398,7 +398,7 @@ public class Player_Entry extends JFrame {
             
             startUDPReceiver();
             
-            System.out.println("✅ UDP initialized - Broadcast: " + BROADCAST_PORT + ", Receive: " + RECEIVE_PORT);
+            System.out.println(" UDP initialized - Broadcast: " + BROADCAST_PORT + ", Receive: " + RECEIVE_PORT);
             
         } catch (SocketException | UnknownHostException e) {
             showUDPError("UDP socket error: " + e.getMessage());
@@ -416,14 +416,14 @@ public class Player_Entry extends JFrame {
                 try {
                     receiveSocket.receive(packet);
                     String received = new String(packet.getData(), 0, packet.getLength());
-                    System.out.println("📥 UDP Received: " + received);
+                    System.out.println(" UDP Received: " + received);
                     
                     if (received.contains(":")) {
                         String[] parts = received.split(":");
                         if (parts.length == 2) {
                             int senderId = Integer.parseInt(parts[0].trim());
                             int hitId = Integer.parseInt(parts[1].trim());
-                            System.out.println("🎯 Hit detected: sender=" + senderId + ", hit=" + hitId);
+                            System.out.println(" Hit detected: sender=" + senderId + ", hit=" + hitId);
                             broadcastEquipmentCode(hitId);
                         }
                     }
@@ -450,7 +450,7 @@ public class Player_Entry extends JFrame {
             InetAddress address = InetAddress.getByName(broadcastIp);
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, BROADCAST_PORT);
             broadcastSocket.send(packet);
-            System.out.println("📤 Broadcast equipment ID: " + equipmentId + " to " + broadcastIp + ":" + BROADCAST_PORT);
+            System.out.println(" Broadcast equipment ID: " + equipmentId + " to " + broadcastIp + ":" + BROADCAST_PORT);
             statusLabel.setText("Last broadcast: " + equipmentId);
         } catch (IOException e) {
             System.err.println("Broadcast error: " + e.getMessage());
@@ -544,7 +544,7 @@ public class Player_Entry extends JFrame {
             InetAddress address = InetAddress.getByName(broadcastIp);
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, BROADCAST_PORT);
             broadcastSocket.send(packet);
-            System.out.println("📤 Broadcast code: " + code);
+            System.out.println(" Broadcast code: " + code);
         } catch (IOException e) {
             System.err.println("Broadcast error: " + e.getMessage());
         }
