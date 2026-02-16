@@ -37,6 +37,82 @@ sudo apt install git postgresql postgresql-contrib netcat-openbsd wget -y
 sudo apt install postgresql postgresql-contrib -y
 ```
 
+## To Update Database:
+Set up Database: 
+```
+sudo -u postgres psql 
+```
+Create the database
+
+Check to see what databases already exist: 
+```
+\1 
+```
+
+Connect to ew database:  
+```
+\c photon 
+```
+
+If "photon" not (in database) there: 
+```
+CREATE DATABASE photon 
+```
+
+Create player table: 
+```
+CREATE TABLE players (id SERIAL PRIMARY KEY, name VARCHAR(100), team VARCHAR(10), equipment_id INTEGER UNIQUE);
+```
+
+Check to see if table created:
+```
+\d players 
+```
+Command to exit the PostgreSQL:
+```
+\q 
+```
+
+USER TRUST AUTHENTICATION: 
+
+Admin creation 
+```
+sudo -u postgres psql 
+```
+                                 
+Create the user: 
+```
+CREATE USER student; 
+```                                    
+Make user supervisor: 
+```
+ALTER USER student WITH SUPERUSER; 
+```                                    
+Grant permission photon database: 
+```
+GRANT ALL PRIVILEGES ON DATABASE photon TO student; 
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO student;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO student;
+```
+Exit PostgreSQL: 
+```
+\q 
+```
+TRUST AUTHENTICATION:
+```
+sudo -u postgres psql -c "SHOW hba_file;"
+sudo nano /etc/postgresql/13/main/pg_hba.conf
+```
+Add this line before IPv4 connections:
+```
+host    photon          student         127.0.0.1/32    trust
+```
+
+Exit nano file and RESTART PostgreSQL:
+```
+sudo systemctl restart postgresql
+```
+
 ## Step 5: Cloning the repositiory on the Virtual machine and getting into the right folder
 ```
 git clone https://github.com/JoeP05-05/Software-Team-16.git
