@@ -54,9 +54,16 @@ chmod +x install.sh
 ./install.sh
 ```
 
-## Step 7: Run the program
+## Step 7: Run the test file
+```
+javac -cp .:postgresql-42.7.4.jar test.java
+java -cp .:postgresql-42.7.4.jar test
+```
+
+## Step 8: Run Main
 ```
 java -cp .:postgresql-42.7.4.jar Main
 ```
+
 
 
