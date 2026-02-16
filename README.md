@@ -44,12 +44,7 @@ sudo -u postgres psql
 ```
 Create the database
 
-Check to see what databases already exist: 
-```
-\1 
-```
-
-Connect to ew database:  
+Connect to new database:  
 ```
 \c photon 
 ```
@@ -117,9 +112,6 @@ sudo systemctl restart postgresql
 ```
 git clone https://github.com/JoeP05-05/Software-Team-16.git
 cd Software-Team-16
-```
-Then, to get into the correct folder to run the program, do the following:
-```
 cd Project
 cd code
 ```
