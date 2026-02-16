@@ -54,3 +54,9 @@ chmod +x install.sh
 ./install.sh
 ```
 
+## Step 7: Run the program
+```
+java -cp .:postgresql-42.7.4.jar Main
+```
+
+
