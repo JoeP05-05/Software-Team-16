@@ -130,6 +130,7 @@ java -cp .:postgresql-42.7.4.jar test
 
 ## Step 8: Run Main
 ```
+javac -cp .:postgresql-42.7.4.jar *.java
 java -cp .:postgresql-42.7.4.jar Main
 ```
 
