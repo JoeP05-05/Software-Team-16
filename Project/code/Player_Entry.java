@@ -355,16 +355,12 @@ public class Player_Entry extends JFrame {
     }
     
     private void loadPlayersFromDatabase() throws SQLException {
-        String sql = "SELECT id, name, equipment_id FROM players WHERE equipment_id IS NOT NULL";
+        String sql = "SELECT id, codename FROM players";
         try (Statement stmt = dbConnection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 int playerId = rs.getInt("id");
-                String name = rs.getString("name");
-                Integer equipmentId = rs.getInt("equipment_id");
-                if (!rs.wasNull()) {
-                    usedEquipmentIds.add(equipmentId);
-                }
+                String name = rs.getString("codename");
                 playerDatabase.put(playerId, name);
             }
         }
@@ -377,7 +373,7 @@ public class Player_Entry extends JFrame {
     
     private void addPlayerToDatabase(int playerId, String codeName) {
         try {
-            String sql = "INSERT INTO players (id, name, team, equipment_id) VALUES (?, ?, NULL, NULL)";
+            String sql = "INSERT INTO players (id, codename) VALUES (?, ?)";
             try (PreparedStatement pstmt = dbConnection.prepareStatement(sql)) {
                 pstmt.setInt(1, playerId);
                 pstmt.setString(2, codeName);
@@ -386,7 +382,7 @@ public class Player_Entry extends JFrame {
         } catch (SQLException e) {
             // If player ID already exists, update the name
             try {
-                String sql = "UPDATE players SET name = ? WHERE id = ?";
+                String sql = "UPDATE players SET codename = ? WHERE id = ?";
                 try (PreparedStatement pstmt = dbConnection.prepareStatement(sql)) {
                     pstmt.setString(1, codeName);
                     pstmt.setInt(2, playerId);

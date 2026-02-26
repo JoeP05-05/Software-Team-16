@@ -3,6 +3,8 @@
 import java.sql.*;
 import java.net.*;
 import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
 
 public class test {
     public static void main(String[] args) {
@@ -52,9 +54,11 @@ public class test {
             DatabaseMetaData meta = conn.getMetaData();
             ResultSet tables = meta.getTables(null, null, "players", null);
 
-            if (tables.next()) {
+            if (tables.next()) 
+            {
                 System.out.println(" SUCCESS: 'players' table exists");
 
+                // Count existing players
                 try (Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM players")) {
                     rs.next();
@@ -62,17 +66,29 @@ public class test {
                     System.out.println(" Current players in database: " + count);
                 }
 
+                // Show table structure
                 System.out.println("\n Table structure:");
                 ResultSet columns = meta.getColumns(null, null, "players", null);
-                while (columns.next()) {
+                while (columns.next()) 
+                {
                     String colName = columns.getString("COLUMN_NAME");
                     String colType = columns.getString("TYPE_NAME");
                     System.out.println("   - " + colName + " (" + colType + ")");
                 }
 
+                // Test simple query that matches your actual table
+                String sql = "SELECT id, codename FROM players";
+                try (Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql)) {
+                    System.out.println("\n Sample rows:");
+                    while (rs.next()) {
+                        System.out.println("   id=" + rs.getInt("id") +
+                                        ", codename=" + rs.getString("codename"));
+                    }
+                }
+
             } else {
                 System.out.println(" ERROR: 'players' table does not exist");
-                System.out.println("   Run: CREATE TABLE players (id SERIAL PRIMARY KEY, name VARCHAR(100), team VARCHAR(10), equipment_id INTEGER UNIQUE);");
             }
 
             conn.close();
