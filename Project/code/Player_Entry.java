@@ -329,10 +329,10 @@ public class Player_Entry extends JFrame {
 
             Map<String, String> connectionParams = new HashMap<>();
             connectionParams.put("dbname", "photon");
-            // connectionParams.put("user", "student");
-            // connectionParams.put("password", "student");
-            // connectionParams.put("host", "localhost");
-            // connectionParams.put("port", "5432");
+            connectionParams.put("user", "student");
+            connectionParams.put("password", "student");
+            connectionParams.put("host", "localhost");
+            connectionParams.put("port", "5432");
 
             String host = connectionParams.getOrDefault("host", "127.0.0.1");
             String port = connectionParams.getOrDefault("port", "5432");
@@ -343,11 +343,7 @@ public class Player_Entry extends JFrame {
             String user = connectionParams.get("user");
             String pass = connectionParams.get("password");
 
-            if (user != null && pass != null) {
-                dbConnection = DriverManager.getConnection(url, user, pass);
-            } else {
-                dbConnection = DriverManager.getConnection(url);
-            }
+            dbConnection = DriverManager.getConnection(url, user, pass);
 
             System.out.println("Connected to PostgreSQL database");
             loadPlayersFromDatabase();
@@ -356,7 +352,7 @@ public class Player_Entry extends JFrame {
             showDatabaseError("Database connection failed: " + e.getMessage());
             e.printStackTrace();
         }
-        }
+    }
     
     private void loadPlayersFromDatabase() throws SQLException {
         String sql = "SELECT id, name, equipment_id FROM players WHERE equipment_id IS NOT NULL";

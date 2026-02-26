@@ -18,60 +18,75 @@ public class test {
         testUDPReceive();
     }
     
-    private static void testDatabase() {
+    private static void testDatabase() 
+    {
         System.out.println(" TEST 1: PostgreSQL Connection");
         System.out.println("--------------------------------");
-        
+
         try {
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://127.0.0.1:5432/photon";
-            
-            try (Connection conn = DriverManager.getConnection(url, "student", "")) {
-                System.out.println(" SUCCESS: Connected to database");
-                
-                // Check if players table exists
-                DatabaseMetaData meta = conn.getMetaData();
-                ResultSet tables = meta.getTables(null, null, "players", null);
-                
-                if (tables.next()) {
-                    System.out.println(" SUCCESS: 'players' table exists");
-                    
-                    // Count existing players
-                    try (Statement stmt = conn.createStatement();
-                         ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM players")) {
-                        rs.next();
-                        int count = rs.getInt(1);
-                        System.out.println(" Current players in database: " + count);
-                    }
-                    
-                    // Show table structure
-                    System.out.println("\n Table structure:");
-                    ResultSet columns = meta.getColumns(null, null, "players", null);
-                    while (columns.next()) {
-                        String colName = columns.getString("COLUMN_NAME");
-                        String colType = columns.getString("TYPE_NAME");
-                        System.out.println("   - " + colName + " (" + colType + ")");
-                    }
-                    
-                } else {
-                    System.out.println(" ERROR: 'players' table does not exist");
-                    System.out.println("   Run: CREATE TABLE players (id SERIAL PRIMARY KEY, name VARCHAR(100), team VARCHAR(10), equipment_id INTEGER UNIQUE);");
+
+            // Python-style connection params
+            Map<String, String> params = new HashMap<>();
+            params.put("dbname", "photon");
+            params.put("user", "student");
+            params.put("password", "student");
+            params.put("host", "localhost");
+            params.put("port", "5432");
+
+            // Defaults if not provided
+            String host = params.getOrDefault("host", "127.0.0.1");
+            String port = params.getOrDefault("port", "5432");
+            String db   = params.get("dbname");
+
+            String url = String.format("jdbc:postgresql://%s:%s/%s", host, port, db);
+
+            String user = params.get("user");
+            String pass = params.get("password");
+
+            Connection conn = DriverManager.getConnection(url, user, pass);
+
+            System.out.println(" SUCCESS: Connected to database");
+
+            // Check if players table exists
+            DatabaseMetaData meta = conn.getMetaData();
+            ResultSet tables = meta.getTables(null, null, "players", null);
+
+            if (tables.next()) {
+                System.out.println(" SUCCESS: 'players' table exists");
+
+                try (Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM players")) {
+                    rs.next();
+                    int count = rs.getInt(1);
+                    System.out.println(" Current players in database: " + count);
                 }
-                
-            } catch (SQLException e) {
-                System.out.println(" ERROR: " + e.getMessage());
-                System.out.println("\n🔧 Troubleshooting:");
-                System.out.println("   1. Is PostgreSQL running? (sudo systemctl status postgresql)");
-                System.out.println("   2. Does 'student' user have trust authentication?");
-                System.out.println("   3. Does 'photon' database exist?");
+
+                System.out.println("\n Table structure:");
+                ResultSet columns = meta.getColumns(null, null, "players", null);
+                while (columns.next()) {
+                    String colName = columns.getString("COLUMN_NAME");
+                    String colType = columns.getString("TYPE_NAME");
+                    System.out.println("   - " + colName + " (" + colType + ")");
+                }
+
+            } else {
+                System.out.println(" ERROR: 'players' table does not exist");
+                System.out.println("   Run: CREATE TABLE players (id SERIAL PRIMARY KEY, name VARCHAR(100), team VARCHAR(10), equipment_id INTEGER UNIQUE);");
             }
-            
+
+            conn.close();
+
+        } catch (SQLException e) {
+            System.out.println(" ERROR: " + e.getMessage());
+            System.out.println("\n🔧 Troubleshooting:");
+            System.out.println("   1. Is PostgreSQL running?");
+            System.out.println("   2. Does the 'student' user have a password set?");
+            System.out.println("   3. Does 'photon' database exist?");
         } catch (ClassNotFoundException e) {
             System.out.println(" ERROR: PostgreSQL JDBC Driver not found");
-            System.out.println("   Download from: https://jdbc.postgresql.org/download/");
-            System.out.println("   Add to classpath: javac -cp .:postgresql-42.7.4.jar test.java");
         }
-        
+
         System.out.println();
     }
     
