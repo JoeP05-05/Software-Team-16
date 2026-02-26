@@ -27,7 +27,7 @@ java -version
 ```
 
 ## Step 3
-Install Git, and PostgreSQL, and wget:
+Install Git:
 ```
 sudo apt install git -y
 ```
