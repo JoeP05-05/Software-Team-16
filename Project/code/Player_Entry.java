@@ -322,24 +322,41 @@ public class Player_Entry extends JFrame {
         return buttonPanel;
     }
     
-    private void initDatabase() {
+    private void initDatabase() 
+    {
         try {
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://127.0.0.1:5432/photon";
-            dbConnection = DriverManager.getConnection(url, "student", "");
-            System.out.println(" Connected to PostgreSQL database");
-            
-            // Load existing players into memory
+
+            Map<String, String> connectionParams = new HashMap<>();
+            connectionParams.put("dbname", "photon");
+            // connectionParams.put("user", "student");
+            // connectionParams.put("password", "student");
+            // connectionParams.put("host", "localhost");
+            // connectionParams.put("port", "5432");
+
+            String host = connectionParams.getOrDefault("host", "127.0.0.1");
+            String port = connectionParams.getOrDefault("port", "5432");
+            String db   = connectionParams.get("dbname");
+
+            String url = String.format("jdbc:postgresql://%s:%s/%s", host, port, db);
+
+            String user = connectionParams.get("user");
+            String pass = connectionParams.get("password");
+
+            if (user != null && pass != null) {
+                dbConnection = DriverManager.getConnection(url, user, pass);
+            } else {
+                dbConnection = DriverManager.getConnection(url);
+            }
+
+            System.out.println("Connected to PostgreSQL database");
             loadPlayersFromDatabase();
-            
-        } catch (ClassNotFoundException e) {
-            showDatabaseError("PostgreSQL JDBC Driver not found!");
-            e.printStackTrace();
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             showDatabaseError("Database connection failed: " + e.getMessage());
             e.printStackTrace();
         }
-    }
+        }
     
     private void loadPlayersFromDatabase() throws SQLException {
         String sql = "SELECT id, name, equipment_id FROM players WHERE equipment_id IS NOT NULL";
