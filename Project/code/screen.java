@@ -161,21 +161,21 @@ public class screen extends JWindow {
         timer.start();
     }
    
-    // ADD THIS MAIN METHOD
-    public static void main(String[] args) {
-        // Set look and feel to system default
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    // // ADD THIS MAIN METHOD
+    // public static void main(String[] args) {
+    //     // Set look and feel to system default
+    //     try {
+    //         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
         
-        // Run the splash screen on the Event Dispatch Thread
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new screen();
-            }
-        });
-    }
+    //     // Run the splash screen on the Event Dispatch Thread
+    //     SwingUtilities.invokeLater(new Runnable() {
+    //         @Override
+    //         public void run() {
+    //             new screen();
+    //         }
+        // });
+    // }
 }
