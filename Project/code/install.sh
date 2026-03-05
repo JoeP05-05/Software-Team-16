@@ -1,21 +1,23 @@
 #!/bin/bash
 
+echo "Updating package lists..."
+sudo apt update
+
+echo "Installing Java JDK..."
+sudo apt install default-jdk -y
+
+echo "Checking Java installation..."
+java -version
+
+echo "Installing Git..."
+sudo apt install git -y
+
+# Check if javac exists
 if ! command -v javac &> /dev/null
 then
   echo "Java compiler not installed."
-  echo "Do: sudo apt install default-jdk"
-exit 1
+  echo "Try: sudo apt install default-jdk"
+  exit 1
 fi
 
-echo "Compiling Java files: "
-
-#Compiles all java files
-javac -cp .:postgresql-42.7.4.jar *.java
-
-#Checks if possible to compile java files
-if [ $? -ne 0 ]; then
-    echo "Compilation failed."
-    exit 1
-fi
-
-echo "Compiling done."
+echo "Compilation done."
