@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.image.BufferedImage;
 
-public class loading extends JWindow {
+public class countdown extends JWindow {
 
 
 
