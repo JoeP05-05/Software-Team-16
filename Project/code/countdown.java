@@ -28,6 +28,6 @@ public class countdown extends JWindow {
   
 
 
-//Call it from Player Entry, near dispose statement. Make sure to incldue a dispose as well.
+//Call it from Player Entry, do a 5 second counter
 
 }
