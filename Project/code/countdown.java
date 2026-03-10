@@ -10,8 +10,24 @@ import java.awt.image.BufferedImage;
 
 public class countdown extends JWindow {
 
+    
 
+    public countdown()
+    {
+        
+        count_timer();
+    }
 
+    public count_timer()
+    {
+
+        int count = 30;
+
+    }
 
   
+
+
+//Call it from Player Entry, near dispose statement. Make sure to incldue a dispose as well.
+
 }
