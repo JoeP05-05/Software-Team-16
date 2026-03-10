@@ -394,6 +394,42 @@ public class Player_Entry extends JFrame {
     private void updateTeamCounts() {
         int greenCount = 0;
         int redCount   = 0;
+        // Count red team players
+        for (Component comp : redTeamPanel.getComponents()) 
+        {
+            if (comp instanceof JScrollPane) 
+            {
+                JTable table = (JTable) ((JScrollPane) comp).getViewport().getV>
+
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    String playerId = (String) table.getValueAt(i, 0);
+                    String equipId = (String) table.getValueAt(i, 1);
+
+                    if (playerId != null && equipId != null &&
+                        !playerId.trim().isEmpty() && !equipId.trim().isEmpty()>
+                        redCount++;
+                    }
+                }
+            }
+        }
+        // Count red team players
+        for (Component comp : redTeamPanel.getComponents()) 
+        {
+            if (comp instanceof JScrollPane) 
+            {
+                JTable table = (JTable) ((JScrollPane) comp).getViewport().getV>
+
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    String playerId = (String) table.getValueAt(i, 0);
+                    String equipId = (String) table.getValueAt(i, 1);
+
+                    if (playerId != null && equipId != null &&
+                        !playerId.trim().isEmpty() && !equipId.trim().isEmpty()>
+                        redCount++;
+                    }
+                }
+            }
+        }
         greenCountLabel.setText("Green: " + greenCount);
         redCountLabel.setText("Red: " + redCount);
     }
