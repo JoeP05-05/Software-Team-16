@@ -518,6 +518,8 @@ public class Player_Entry extends JFrame {
 
         if (warning == JOptionPane.OK_OPTION) 
         {
+            // This is where countdown.java should start running
+            
             // Broadcast game start code 202
             broadcastCode(202);
 
