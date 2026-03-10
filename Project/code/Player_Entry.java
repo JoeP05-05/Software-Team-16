@@ -394,8 +394,8 @@ public class Player_Entry extends JFrame {
     private void updateTeamCounts() {
         int greenCount = 0;
         int redCount   = 0;
-        // Count red team players
-        for (Component comp : redTeamPanel.getComponents()) 
+        // Count green team players
+        for (Component comp : greenTeamPanel.getComponents()) 
         {
             if (comp instanceof JScrollPane) 
             {
@@ -407,7 +407,7 @@ public class Player_Entry extends JFrame {
 
                     if (playerId != null && equipId != null &&
                         !playerId.trim().isEmpty() && !equipId.trim().isEmpty()>
-                        redCount++;
+                        greenCount++;
                     }
                 }
             }
