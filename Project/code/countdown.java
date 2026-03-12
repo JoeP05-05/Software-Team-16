@@ -4,30 +4,73 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.awt.image.BufferedImage;
 
 public class countdown extends JWindow {
 
     
+    private int time_left = 5;
+    private JLabel timerLabel;
 
     public countdown()
     {
-        
+        //Sets up the window for the countdown
+        setupCountBox();
+
+        //Allows the box to appear on the screen
+        setupBackground();
+
+        //Where the actual timer is calculated
         count_timer();
     }
 
-    public count_timer()
+    private void setupCountBox()
     {
+        setSize(200,200);
 
-        int count = 30;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+
+        setLocation(x, y);
+    }
+
+    private void setupBackground() {
+            JPanel MainPanel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.setColor()
+                    g.drawRect(100, 100, 100, 100);
+                }
+            }
+            MainPanel.setLayout(new BorderLayout());
+
+        timerLabel = new JLabel("5", SwingConstants.CENTER());
+        timerLabel.setFont(new Font("Arial", Font.BOLD, 80));
+        timerLabel.setForeground(Color.WHITE);
+        MainPanel.add(timerLabel, BorderLayout.CENTER);
+        
+        setContentPane(mainPanel);
+        setVisible(true);
 
     }
 
-  
+    
+    private void count_timer()
+    {
+        Timer countdown = new Timer(1000, new ActionListener() );
+        @Override
+        public void actionPerformed(ActionListener e)
+        {
+            time_left--;
+            timerLabel.setText(String.valueof(time_left));
 
+            if (timer_left <= 0)
+            {
+                ((Timer)e.getSource().stop());
+            }
+        }
+    }
 
-//Call it from Player Entry, do a 5 second counter
 
 }
