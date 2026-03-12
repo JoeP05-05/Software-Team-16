@@ -406,7 +406,7 @@ public class Player_Entry extends JFrame {
                     String equipId = (String) table.getValueAt(i, 1);
 
                     if (playerId != null && equipId != null &&
-                        !playerId.trim().isEmpty() && !equipId.trim().isEmpty()>
+                        !playerId.trim().isEmpty() && !equipId.trim().isEmpty())
                         greenCount++;
                     }
                 }
@@ -424,7 +424,7 @@ public class Player_Entry extends JFrame {
                     String equipId = (String) table.getValueAt(i, 1);
 
                     if (playerId != null && equipId != null &&
-                        !playerId.trim().isEmpty() && !equipId.trim().isEmpty()>
+                        !playerId.trim().isEmpty() && !equipId.trim().isEmpty())
                         redCount++;
                     }
                 }
@@ -511,7 +511,7 @@ public class Player_Entry extends JFrame {
 
         // Show 30 second warning
         int warning = JOptionPane.showConfirmDialog(this,
-            "Game will start in 30 seconds.\nPrepare players!\n\nClick OK to co>
+            "Game will start in 30 seconds.\nPrepare players!\n\nClick OK to continue.",
             "Game Starting Soon",
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.WARNING_MESSAGE);
@@ -519,13 +519,14 @@ public class Player_Entry extends JFrame {
         if (warning == JOptionPane.OK_OPTION) 
         {
             // This is where countdown.java should start running
-            
+            new countdown();
+
             // Broadcast game start code 202
             broadcastCode(202);
 
             // Here you would open the Play Action Screen
             JOptionPane.showMessageDialog(this,
-                "GAME STARTED!\n\nBroadcast code 202 sent on port " + BROADCAST>
+                "GAME STARTED!\n\nBroadcast code 202 sent on port " + BROADCAST +
                 "Game Started",
                 JOptionPane.INFORMATION_MESSAGE);
             
