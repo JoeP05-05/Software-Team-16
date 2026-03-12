@@ -39,7 +39,7 @@ public class countdown extends JWindow {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    g.setColor()
+                    g.setColor();
                     g.drawRect(100, 100, 100, 100);
                 }
             }
@@ -55,7 +55,6 @@ public class countdown extends JWindow {
 
     }
 
-    
     private void count_timer()
     {
         Timer countdown = new Timer(1000, new ActionListener() );
