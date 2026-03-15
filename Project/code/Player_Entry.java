@@ -522,23 +522,31 @@ public class Player_Entry extends JFrame {
 
         if (warning == JOptionPane.OK_OPTION) 
         {
-            // This is where countdown.java should start running
+            // Start the countdown window
             new countdown();
 
-            // Broadcast game start code 202
-            broadcastCode(202);
+            // Wait 30 seconds before starting the game
+            Timer startDelay = new Timer(30000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
-            // Here you would open the Play Action Screen
-            JOptionPane.showMessageDialog(this,
-                "GAME STARTED!\n\nBroadcast code 202 sent on port " + BROADCAST_PORT,
-                "Game Started",
-                JOptionPane.INFORMATION_MESSAGE);
-            
-            // For now, just update status
-            statusLabel.setText("Game in progress...");
+                    // Broadcast game start code 202
+                    broadcastCode(202);
 
-            dispose();
-            new PlayActionDisplay(redPlayers, greenPlayers, names);
+                    JOptionPane.showMessageDialog(Player_Entry.this,
+                        "GAME STARTED!\n\nBroadcast code 202 sent on port " + BROADCAST_PORT,
+                        "Game Started",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                    statusLabel.setText("Game in progress...");
+
+                    dispose();
+                    new PlayActionDisplay(redPlayers, greenPlayers, names);
+                }
+            });
+
+            startDelay.setRepeats(false); // only run once
+            startDelay.start();
         }
 
     }
