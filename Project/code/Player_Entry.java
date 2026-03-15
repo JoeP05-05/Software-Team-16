@@ -530,16 +530,17 @@ public class Player_Entry extends JFrame {
 
             // Here you would open the Play Action Screen
             JOptionPane.showMessageDialog(this,
-                "GAME STARTED!\n\nBroadcast code 202 sent on port " + BROADCAST +
+                "GAME STARTED!\n\nBroadcast code 202 sent on port " + BROADCAST_PORT +
                 "Game Started",
                 JOptionPane.INFORMATION_MESSAGE);
             
             // For now, just update status
             statusLabel.setText("Game in progress...");
+
+            dispose();
+            new PlayActionDisplay(redPlayers, greenPlayers, names);
         }
 
-        dispose();
-        new PlayActionDisplay(redPlayers, greenPlayers, names);
     }
 
     private void broadcastCode(int code) {
