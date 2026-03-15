@@ -1,5 +1,6 @@
 //Names: Joss Jongewaard, Kaija Frierson, Taija Frierson, Joseph Peraza 
 //Team: Team 16 
+//This is the main file
 import javax.swing.*;
 
 public class Main {
