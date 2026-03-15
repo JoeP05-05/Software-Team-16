@@ -35,22 +35,24 @@ public class countdown extends JWindow {
     }
 
     private void setupBackground() {
-            JPanel MainPanel = new JPanel() {
+            JPanel MainPanel = new JPanel() 
+            {
                 @Override
-                protected void paintComponent(Graphics g) {
+                protected void paintComponent(Graphics g) 
+                {
                     super.paintComponent(g);
-                    g.setColor();
+                    g.setColor(Color.BLACK);
                     g.drawRect(100, 100, 100, 100);
                 }
-            }
+            };
             MainPanel.setLayout(new BorderLayout());
 
-        timerLabel = new JLabel("5", SwingConstants.CENTER());
+        timerLabel = new JLabel("5", SwingConstants.CENTER);
         timerLabel.setFont(new Font("Arial", Font.BOLD, 80));
         timerLabel.setForeground(Color.WHITE);
         MainPanel.add(timerLabel, BorderLayout.CENTER);
         
-        setContentPane(mainPanel);
+        setContentPane(MainPanel);
         setVisible(true);
 
     }
@@ -62,14 +64,16 @@ public class countdown extends JWindow {
         public void actionPerformed(ActionListener e)
         {
             time_left--;
-            timerLabel.setText(String.valueof(time_left));
+            timerLabel.setText(String.valueOf(time_left));
 
-            if (timer_left <= 0)
+            if (time_left <= 0)
             {
-                ((Timer)e.getSource().stop());
+                ((Timer)e.getSource()).stop();
             }
-        }
+        };
+        countdown.start();
     }
+
 
 
 }
