@@ -399,7 +399,7 @@ public class Player_Entry extends JFrame {
         {
             if (comp instanceof JScrollPane) 
             {
-                JTable table = (JTable) ((JScrollPane) comp).getViewport().getV>;
+                JTable table = (JTable) ((JScrollPane) comp).getViewport().getView();
 
                 for (int i = 0; i < table.getRowCount(); i++) 
                 {
@@ -419,7 +419,7 @@ public class Player_Entry extends JFrame {
         {
             if (comp instanceof JScrollPane) 
             {
-                JTable table = (JTable) ((JScrollPane) comp).getViewport().getV>;
+                JTable table = (JTable) ((JScrollPane) comp).getViewport().getView();
 
                 for (int i = 0; i < table.getRowCount(); i++) 
                 {
