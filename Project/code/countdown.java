@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class countdown extends JWindow {
 
     
-    private int time_left = 5;
+    private int time_left = 30;
     private JLabel timerLabel;
 
     public countdown()
@@ -59,7 +59,7 @@ public class countdown extends JWindow {
 
     private void count_timer()
     {
-        Timer countdown = new Timer(1000, new ActionListener() {
+        Timer countdown = new Timer(30000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) 
             {
