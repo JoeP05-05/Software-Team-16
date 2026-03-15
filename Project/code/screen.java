@@ -1,5 +1,6 @@
 //Names: Joss Jongewaard, Kaija Frierson, Taija Frierson, Joseph Peraza 
 //Team: Team 16 
+//Code for the screen display
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
