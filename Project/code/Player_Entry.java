@@ -408,7 +408,7 @@ public class Player_Entry extends JFrame {
                     if (playerId != null && equipId != null &&
                         !playerId.trim().isEmpty() && !equipId.trim().isEmpty())
                         greenCount++;
-                    }
+                    
                 }
             }
         }
@@ -426,8 +426,8 @@ public class Player_Entry extends JFrame {
                     if (playerId != null && equipId != null &&
                         !playerId.trim().isEmpty() && !equipId.trim().isEmpty())
                         redCount++;
-                    }
                 }
+                
             }
         }
         greenCountLabel.setText("Green: " + greenCount);
