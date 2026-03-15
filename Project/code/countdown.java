@@ -59,18 +59,19 @@ public class countdown extends JWindow {
 
     private void count_timer()
     {
-        Timer countdown = new Timer(1000, new ActionListener() );
-        @Override
-        public void actionPerformed(ActionListener e)
-        {
-            time_left--;
-            timerLabel.setText(String.valueOf(time_left));
-
-            if (time_left <= 0)
+        Timer countdown = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) 
             {
-                ((Timer)e.getSource()).stop();
+                time_left--;
+                timerLabel.setText(String.valueOf(time_left));
+
+                if (time_left <= 0) {
+                    ((Timer)e.getSource()).stop();
+                    dispose();
+                }
             }
-        };
+        });
         countdown.start();
     }
 
