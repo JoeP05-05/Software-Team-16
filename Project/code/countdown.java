@@ -47,7 +47,7 @@ public class countdown extends JWindow {
             };
             MainPanel.setLayout(new BorderLayout());
 
-        timerLabel = new JLabel("5", SwingConstants.CENTER);
+        timerLabel = new JLabel("30", SwingConstants.CENTER);
         timerLabel.setFont(new Font("Arial", Font.BOLD, 80));
         timerLabel.setForeground(Color.WHITE);
         MainPanel.add(timerLabel, BorderLayout.CENTER);
@@ -59,7 +59,7 @@ public class countdown extends JWindow {
 
     private void count_timer()
     {
-        Timer countdown = new Timer(30000, new ActionListener() {
+        Timer countdown = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) 
             {
