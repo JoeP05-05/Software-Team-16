@@ -14,10 +14,13 @@ public class countdown extends JWindow {
     public countdown()
     {
         //Sets up the window for the countdown
-        setupCountBox();
+        //setupCountBox();
+        setupWindow();
 
         //Allows the box to appear on the screen
-        setupBackground();
+        //setupBackground();
+        setupUI();
+
 
         //Where the actual timer is calculated
         count_timer();
