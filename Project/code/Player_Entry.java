@@ -524,6 +524,7 @@ public class Player_Entry extends JFrame {
         {
             // Start the countdown window
             new countdown();
+            Thread.sleep(15000);
             //Add wait to line up audio
             music.playRandomTrack();
 
