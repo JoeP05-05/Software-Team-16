@@ -10,11 +10,11 @@ public class music {
         "../assets/Music/Track01.mp3",
         "../assets/Music/Track02.mp3",
         "../assets/Music/Track03.mp3",
-        "../assets/Music/Track04.mp3,
-        "../assets/Music/Track05.mp3,
-        "../assets/Music/Track06.mp3,
-        "../assets/Music/Track07.mp3,
-        "../assets/Music/Track08.mp3
+        "../assets/Music/Track04.mp3",
+        "../assets/Music/Track05.mp3",
+        "../assets/Music/Track06.mp3",
+        "../assets/Music/Track07.mp3",
+        "../assets/Music/Track08.mp3"
     };
 
     // Holds the currently running mpg123 process so we can stop it later.
