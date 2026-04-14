@@ -26,16 +26,6 @@ public class countdown extends JWindow {
         count_timer();
     }
 
-    /*private void setupCountBox()
-    {
-        setSize(200,200);
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width - getWidth()) / 2;
-        int y = (screenSize.height - getHeight()) / 2;
-
-        setLocation(x, y);
-    }*/
 
     private void setupWindow() 
     {
@@ -48,28 +38,6 @@ public class countdown extends JWindow {
         setLocation(x, y);
     }
 
-    /*private void setupBackground() {
-            JPanel MainPanel = new JPanel() 
-            {
-                @Override
-                protected void paintComponent(Graphics g) 
-                {
-                    super.paintComponent(g);
-                    g.setColor(Color.BLACK);
-                    g.drawRect(100, 100, 100, 100);
-                }
-            };
-            MainPanel.setLayout(new BorderLayout());
-
-        timerLabel = new JLabel("30", SwingConstants.CENTER);
-        timerLabel.setFont(new Font("Arial", Font.BOLD, 80));
-        timerLabel.setForeground(Color.WHITE);
-        MainPanel.add(timerLabel, BorderLayout.CENTER);
-        
-        setContentPane(MainPanel);
-        setVisible(true);
-
-    }*/
 
     private void setupUI() 
     {
