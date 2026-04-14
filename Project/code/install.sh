@@ -15,6 +15,11 @@ java -version
 echo
 echo
 
+echo "Installing mpg123..."
+sudo apt install mpg123
+echo
+echo
+
 echo "Installing Git..."
 sudo apt install git -y
 echo
