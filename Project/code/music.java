@@ -7,14 +7,14 @@ public class music {
 
     // Tracks are stored in project/assets/Music/ relative to the working directory.
     private static final String[] TRACKS = {
-        "project/assets/Music/Track01.mp3",
-        "project/assets/Music/Track02.mp3",
-        "project/assets/Music/Track03.mp3",
-        "project/assets/Music/Track04.mp3",
-        "project/assets/Music/Track05.mp3",
-        "project/assets/Music/Track06.mp3",
-        "project/assets/Music/Track07.mp3",
-        "project/assets/Music/Track08.mp3"
+        "../assets/Music/Track01.mp3",
+        "../assets/Music/Track02.mp3",
+        "../assets/Music/Track03.mp3",
+        "../assets/Music/Track04.mp3,
+        "../assets/Music/Track05.mp3,
+        "../assets/Music/Track06.mp3,
+        "../assets/Music/Track07.mp3,
+        "../assets/Music/Track08.mp3
     };
 
     // Holds the currently running mpg123 process so we can stop it later.
