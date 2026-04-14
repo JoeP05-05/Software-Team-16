@@ -524,6 +524,7 @@ public class Player_Entry extends JFrame {
         {
             // Start the countdown window
             new countdown();
+            music.playRandomTrack()
 
             // Wait 30 seconds before starting the game
             Timer startDelay = new Timer(30000, new ActionListener() {
