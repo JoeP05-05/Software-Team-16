@@ -469,7 +469,7 @@ public class Player_Entry extends JFrame {
         }
     }
 
-    private void startGame() throws InterruptedException {
+    private void startGame() {
         List<int[]> redPlayers   = new ArrayList<>();
         List<int[]> greenPlayers = new ArrayList<>();
         Map<Integer, String> names = new HashMap<>();
@@ -524,7 +524,12 @@ public class Player_Entry extends JFrame {
         {
             // Start the countdown window
             new countdown();
-            Thread.sleep(15000);
+            try{
+                Thread.sleep(15000);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            
             //Add wait to line up audio
             music.playRandomTrack();
 
