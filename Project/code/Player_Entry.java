@@ -469,7 +469,7 @@ public class Player_Entry extends JFrame {
         }
     }
 
-    private void startGame() {
+    private void startGame() throws InterruptedException {
         List<int[]> redPlayers   = new ArrayList<>();
         List<int[]> greenPlayers = new ArrayList<>();
         Map<Integer, String> names = new HashMap<>();
