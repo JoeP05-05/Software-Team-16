@@ -525,7 +525,7 @@ public class Player_Entry extends JFrame {
             // Start the countdown window
             new countdown();
 
-            Timer musicTimer = new Timer(16000, new ActionListener() {
+            Timer musicTimer = new Timer(14000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
