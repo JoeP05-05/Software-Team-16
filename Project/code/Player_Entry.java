@@ -525,11 +525,10 @@ public class Player_Entry extends JFrame {
             // Start the countdown window
             new countdown();
 
-            Timer musicTimer = new Timer(14000, new ActionListener() {
+            Timer musicTimer = new Timer(13500, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    
                     music.playRandomTrack();
                 }
             });
@@ -545,12 +544,12 @@ public class Player_Entry extends JFrame {
                     // Broadcast game start code 202
                     broadcastCode(202);
 
-                    JOptionPane.showMessageDialog(Player_Entry.this,
-                        "GAME STARTED!\n\nBroadcast code 202 sent on port " + BROADCAST_PORT,
-                        "Game Started",
-                        JOptionPane.INFORMATION_MESSAGE);
+                    // JOptionPane.showMessageDialog(Player_Entry.this,
+                    //     "GAME STARTED!\n\nBroadcast code 202 sent on port " + BROADCAST_PORT,
+                    //     "Game Started",
+                    //     JOptionPane.INFORMATION_MESSAGE);
 
-                    statusLabel.setText("Game in progress...");
+                    // statusLabel.setText("Game in progress...");
 
                     dispose();
                     new PlayActionDisplay(redPlayers, greenPlayers, names);
