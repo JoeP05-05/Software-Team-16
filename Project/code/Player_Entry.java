@@ -533,7 +533,8 @@ public class Player_Entry extends JFrame {
                     music.playRandomTrack();
                 }
             });
-            
+            musicTimer.setRepeats(false); // only run once
+            musicTimer.start();
             
 
             // Wait 30 seconds before starting the game
