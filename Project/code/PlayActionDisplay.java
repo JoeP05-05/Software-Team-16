@@ -250,10 +250,10 @@ public class PlayActionDisplay extends JFrame {
     }
 
 
-    //Points method
-    private void playerHit()
+    //Tagging method
+    private void playerHit(String data)
     {
-        
+
     }
 
 
@@ -268,6 +268,28 @@ public class PlayActionDisplay extends JFrame {
     private void initUDP() {
         try {
             udpSocket = new DatagramSocket();
+            
+            //Listens on port 7500
+            DatagramSocket receiveCodes = new DatagramSocket(7500);
+            new Thread(() -> {
+                byte[] bufferData = new byte[1024];
+                while (true)
+                {
+                    try{
+                        DatagramPacket playerPacket = new DatagramPacket(bufferData, bufferData.length);
+                        receiveCodes.receive(playerPacket);
+                        String data = new String(playerPacket.getData(), 0, playerPacket.getLength()).trim();
+                        playerHit(data);
+
+                    } catch (Exception e){
+                        System.err.println("Error on receive: " + e.getMessage());
+                    }
+                }
+
+            }).start();
+
+
+
         } catch (Exception ex) {
             System.err.println("UDP error: " + ex.getMessage());
         }
