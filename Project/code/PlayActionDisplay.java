@@ -249,6 +249,14 @@ public class PlayActionDisplay extends JFrame {
         timerLabel.setText("Time Remaining:  " + m + ":" + String.format("%02d", s));
     }
 
+
+    //Points method
+    private void playerHit()
+    {
+        
+    }
+
+
     private void endGame() {
         gameRunning = false;
         timerLabel.setText("GAME OVER");
