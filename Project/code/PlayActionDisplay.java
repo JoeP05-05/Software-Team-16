@@ -20,7 +20,7 @@ public class PlayActionDisplay extends JFrame {
     private static final int    SEND_PORT    = 7500;
     private static final int    RECEIVE_PORT = 7501;
     private static final String BASE_ICON_PATH =
-        "baseicon.jpg";
+        "/home/student/Software-Team-16/Project/assets/images/baseicon.jpg";
 
     private List<int[]>          redPlayers;
     private List<int[]>          greenPlayers;
