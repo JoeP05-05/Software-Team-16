@@ -253,7 +253,28 @@ public class PlayActionDisplay extends JFrame {
     //Tagging method
     private void playerHit(String data)
     {
+        try{
+            String[] split = data.split(":");
+            //For the person who tagged someone
+            int taggerID = Integer.parseInt(split[0]);
 
+            //for the person who got tagged
+            int targetID = Integer.parseInt(split[1]);
+
+            boolean isTaggerRed = redPlayers.stream().anyMatch(p -> p[0] == taggerID);
+            boolean isTargetRed = redPlayers.stream().anyMatch(p -> p[0] == targetID);
+            boolean friendlyFire = (isTaggerRed && isTargetRed) || (!isTaggerRed && !isTargetRed);
+
+            //if there is freindly fire, it will broadcast their ids
+            if (friendlyFire)
+            {
+                broadcastCode(taggerID);
+                broadcastCode(targetID);
+            }
+        } catch (Exception e) {
+            System.err.println("Error on hit: " + e.getMessage());
+
+        }
     }
 
 
