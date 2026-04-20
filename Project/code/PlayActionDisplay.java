@@ -290,8 +290,8 @@ public class PlayActionDisplay extends JFrame {
         try {
             udpSocket = new DatagramSocket();
             
-            //Listens on port 7500
-            DatagramSocket receiveCodes = new DatagramSocket(7500);
+            //Listens on port 7501
+            DatagramSocket receiveCodes = new DatagramSocket(7501);
             new Thread(() -> {
                 byte[] bufferData = new byte[1024];
                 while (true)
