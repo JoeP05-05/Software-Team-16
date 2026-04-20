@@ -261,8 +261,6 @@ public class PlayActionDisplay extends JFrame {
             //for the person who got tagged
             int targetID = Integer.parseInt(split[1]);
 
-            broadcastCode(targetID);
-
             boolean isTaggerRed = redPlayers.stream().anyMatch(p -> p[0] == taggerID);
             boolean isTargetRed = redPlayers.stream().anyMatch(p -> p[0] == targetID);
             boolean friendlyFire = (isTaggerRed && isTargetRed) || (!isTaggerRed && !isTargetRed);
@@ -271,6 +269,10 @@ public class PlayActionDisplay extends JFrame {
             if (friendlyFire)
             {
                 broadcastCode(taggerID);
+                broadcastCode(targetID);
+            }
+            else
+            {
                 broadcastCode(targetID);
             }
         } catch (Exception e) {
