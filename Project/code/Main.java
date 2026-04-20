@@ -10,6 +10,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // SwingUtilities.invokeLater(() -> new screen());
         
         // Show splash screen first, which will open player entry after 3 seconds
         SwingUtilities.invokeLater(new Runnable() {
