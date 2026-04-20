@@ -261,6 +261,8 @@ public class PlayActionDisplay extends JFrame {
             //for the person who got tagged
             int targetID = Integer.parseInt(split[1]);
 
+            broadcastCode(targetID);
+
             boolean isTaggerRed = redPlayers.stream().anyMatch(p -> p[0] == taggerID);
             boolean isTargetRed = redPlayers.stream().anyMatch(p -> p[0] == targetID);
             boolean friendlyFire = (isTaggerRed && isTargetRed) || (!isTaggerRed && !isTargetRed);
@@ -292,6 +294,7 @@ public class PlayActionDisplay extends JFrame {
             
             //Listens on port 7501
             DatagramSocket receiveCodes = new DatagramSocket(7501);
+            receiveCodes.setBroadcast(true);
             new Thread(() -> {
                 byte[] bufferData = new byte[1024];
                 while (true)
