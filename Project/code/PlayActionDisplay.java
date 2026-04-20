@@ -271,6 +271,7 @@ public class PlayActionDisplay extends JFrame {
                 broadcastCode(taggerID);
                 broadcastCode(targetID);
             }
+            //broadcast normally
             else
             {
                 broadcastCode(targetID);
