@@ -20,6 +20,7 @@ public class PlayActionDisplay extends JFrame {
     private List<int[]> redPlayers;
     private List<int[]> greenPlayers;
     private Map<Integer, String> playerNames;
+    private Map<Integer, Integer> playerScores;
 
     private int countdownSeconds = 30;
     private int gameSeconds      = 360;
