@@ -1,4 +1,4 @@
-//Names: Joss Jongewaard, Kaija Frierson, Taija Frierson, Joseph Peraza
+//Names: Joss Jongewaard, Taija Frierson, Kaija Frierson, Joseph Peraza
 //Team: Team 16
 import javax.swing.*;
 import javax.swing.border.*;
