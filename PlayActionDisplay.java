@@ -10,7 +10,6 @@ import java.net.*;
 
 public class PlayActionDisplay extends JFrame {
 
-    // ── Colours ────────────────────────────────────────────────────────────────
     private static final Color BG_BLACK   = Color.BLACK;
     private static final Color BORDER_COL = new Color(180, 220, 0);
     private static final Color CYAN_LABEL = new Color(0, 220, 220);
@@ -18,13 +17,11 @@ public class PlayActionDisplay extends JFrame {
     private static final Color GREEN_COL  = new Color(0, 220, 120);
     private static final Color EVENT_BG   = new Color(30, 30, 180);
 
-    // ── Network ────────────────────────────────────────────────────────────────
     private static final int    SEND_PORT    = 7500;
     private static final int    RECEIVE_PORT = 7501;
     private static final String BASE_ICON_PATH =
         "assets/images/baseicon.jpg";
 
-    // ── Player data ────────────────────────────────────────────────────────────
     private List<int[]>          redPlayers;
     private List<int[]>          greenPlayers;
     private Map<Integer, String> playerNames;
@@ -39,14 +36,13 @@ public class PlayActionDisplay extends JFrame {
     /** equipmentId → whether the base icon has been awarded */
     private final Set<Integer> hasBaseIcon = new HashSet<>();
 
-    // ── Timers / state ─────────────────────────────────────────────────────────
     private int  gameSeconds      = 360;
     private boolean gameRunning   = false;
     private javax.swing.Timer gameTimer;
     private javax.swing.Timer flashTimer;
     private boolean flashState = false;
 
-    // ── UI references ──────────────────────────────────────────────────────────
+
     private JLabel    timerLabel;
     private JLabel    redTotalLabel;
     private JLabel    greenTotalLabel;
@@ -55,17 +51,15 @@ public class PlayActionDisplay extends JFrame {
     private JTextArea eventLog;
     private JButton   returnButton;
 
-    // ── Sockets ────────────────────────────────────────────────────────────────
+
     private DatagramSocket udpSendSocket;
     private DatagramSocket udpReceiveSocket;
     private String networkAddress = "127.0.0.1";
 
-    // ── Base icon (scaled) ─────────────────────────────────────────────────────
+
     private ImageIcon baseIcon;
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // Constructor
-    // ══════════════════════════════════════════════════════════════════════════
+
     public PlayActionDisplay(List<int[]> redPlayers,
                              List<int[]> greenPlayers,
                              Map<Integer, String> playerNames) {
@@ -99,9 +93,6 @@ public class PlayActionDisplay extends JFrame {
         startGameTimer();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // Base-icon loader
-    // ══════════════════════════════════════════════════════════════════════════
     private void loadBaseIcon() {
         try {
             ImageIcon raw = new ImageIcon(BASE_ICON_PATH);
@@ -113,9 +104,6 @@ public class PlayActionDisplay extends JFrame {
         }
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // UI construction  (same layout as original)
-    // ══════════════════════════════════════════════════════════════════════════
     private void buildUI() {
         setLayout(new BorderLayout());
 
@@ -124,7 +112,7 @@ public class PlayActionDisplay extends JFrame {
         outer.setBorder(BorderFactory.createLineBorder(BORDER_COL, 3));
         add(outer, BorderLayout.CENTER);
 
-        // ── Header ──
+        // Header
         JPanel header = new JPanel(new BorderLayout());
         header.setBackground(BG_BLACK);
         header.setBorder(new EmptyBorder(4, 8, 2, 8));
@@ -141,7 +129,6 @@ public class PlayActionDisplay extends JFrame {
 
         outer.add(header, BorderLayout.NORTH);
 
-        // ── Main content ──
         JPanel mainContent = new JPanel(new BorderLayout(0, 0));
         mainContent.setBackground(BG_BLACK);
         outer.add(mainContent, BorderLayout.CENTER);
@@ -154,7 +141,7 @@ public class PlayActionDisplay extends JFrame {
         scoresArea.add(buildTeamColumn("GREEN TEAM", GREEN_COL, false));
         mainContent.add(scoresArea, BorderLayout.NORTH);
 
-        // ── Event log ──
+        //  Event log 
         JPanel eventArea = new JPanel(new BorderLayout(0, 0));
         eventArea.setBackground(BG_BLACK);
         eventArea.setBorder(BorderFactory.createLineBorder(BORDER_COL, 1));
@@ -181,7 +168,7 @@ public class PlayActionDisplay extends JFrame {
         eventArea.add(eventScroll, BorderLayout.CENTER);
         mainContent.add(eventArea, BorderLayout.CENTER);
 
-        // ── Timer bar ──
+        // Timer bar
         JPanel timerBar = new JPanel(new BorderLayout());
         timerBar.setBackground(BG_BLACK);
         timerBar.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, BORDER_COL));
@@ -241,10 +228,6 @@ public class PlayActionDisplay extends JFrame {
         return col;
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // Player panel population  (sorted highest → lowest score)
-    // ══════════════════════════════════════════════════════════════════════════
-
     /** Full initial population (scores all 0). */
     private void refreshPlayerPanels() {
         SwingUtilities.invokeLater(() -> {
@@ -303,9 +286,6 @@ public class PlayActionDisplay extends JFrame {
         panel.repaint();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // Scoring helpers
-    // ══════════════════════════════════════════════════════════════════════════
 
     private void adjustScore(int equipId, int delta) {
         playerScores.merge(equipId, delta, Integer::sum);
@@ -332,10 +312,6 @@ public class PlayActionDisplay extends JFrame {
         hasBaseIcon.add(equipId);
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // Event log
-    // ══════════════════════════════════════════════════════════════════════════
-
     private void logEvent(String message) {
         SwingUtilities.invokeLater(() -> {
             eventLog.append(message + "\n");
@@ -343,10 +319,6 @@ public class PlayActionDisplay extends JFrame {
             eventLog.setCaretPosition(eventLog.getDocument().getLength());
         });
     }
-
-    // ══════════════════════════════════════════════════════════════════════════
-    // Core hit-processing logic
-    // ══════════════════════════════════════════════════════════════════════════
 
     /**
      * Called whenever a UDP hit packet is received.
@@ -361,7 +333,7 @@ public class PlayActionDisplay extends JFrame {
 
         String attackerName = playerNames.getOrDefault(attackerId, "Player " + attackerId);
 
-        // ── Base hit: code 53 → red base scored ──────────────────────────────
+        //Base hit: code 53 → red base scored 
         if (targetId == 53) {
             if (greenEquipIds.contains(attackerId)) {
                 adjustScore(attackerId, 100);
@@ -372,7 +344,7 @@ public class PlayActionDisplay extends JFrame {
             return;
         }
 
-        // ── Base hit: code 43 → green base scored ─────────────────────────────
+        // Base hit: code 43 → green base scored
         if (targetId == 43) {
             if (redEquipIds.contains(attackerId)) {
                 adjustScore(attackerId, 100);
@@ -383,7 +355,7 @@ public class PlayActionDisplay extends JFrame {
             return;
         }
 
-        // ── Player vs. player ─────────────────────────────────────────────────
+        // Player vs. player
         String targetName = playerNames.getOrDefault(targetId, "Player " + targetId);
 
         boolean attackerRed   = redEquipIds.contains(attackerId);
@@ -395,7 +367,7 @@ public class PlayActionDisplay extends JFrame {
         broadcastCode(targetId);
 
         if ((attackerRed && targetRed) || (attackerGreen && targetGreen)) {
-            // ── Friendly fire ──
+            // Friendly fire
             // Also broadcast the attacker's own equipment ID (two transmissions total)
             broadcastCode(attackerId);
 
@@ -404,7 +376,7 @@ public class PlayActionDisplay extends JFrame {
             logEvent("[FF] " + attackerName + " hit teammate " + targetName
                      + "! Both lose 10 pts");
         } else if ((attackerRed && targetGreen) || (attackerGreen && targetRed)) {
-            // ── Enemy tag ──
+            // Enemy tag
             adjustScore(attackerId, 10);
             logEvent("[HIT] " + attackerName + " tagged " + targetName + "! +10 pts");
         }
@@ -422,9 +394,6 @@ public class PlayActionDisplay extends JFrame {
         });
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // Flashing high-score team label
-    // ══════════════════════════════════════════════════════════════════════════
 
     private JLabel flashingLabel = null; // whichever total label is currently flashing
 
@@ -459,9 +428,6 @@ public class PlayActionDisplay extends JFrame {
         }
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // Game timers
-    // ══════════════════════════════════════════════════════════════════════════
 
     private void startGameTimer() {
         broadcastCode(202);
@@ -507,9 +473,6 @@ public class PlayActionDisplay extends JFrame {
         returnButton.setVisible(true);
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // UDP – send
-    // ══════════════════════════════════════════════════════════════════════════
 
     private void initUDP() {
         try {
@@ -531,10 +494,6 @@ public class PlayActionDisplay extends JFrame {
             System.err.println("UDP send error: " + ex.getMessage());
         }
     }
-
-    // ══════════════════════════════════════════════════════════════════════════
-    // UDP – receive  (background thread)
-    // ══════════════════════════════════════════════════════════════════════════
 
     /**
      * Starts a daemon thread that listens for incoming UDP packets on
@@ -581,10 +540,6 @@ public class PlayActionDisplay extends JFrame {
             System.err.println("Could not parse UDP message: " + msg);
         }
     }
-
-    // ══════════════════════════════════════════════════════════════════════════
-    // Key bindings
-    // ══════════════════════════════════════════════════════════════════════════
 
     private void addKeyBindings() {
         JRootPane rootPane = getRootPane();
